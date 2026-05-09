@@ -16,16 +16,32 @@ A multi-agent AI orchestration system built on Claude Code. One central agent (t
 | Developer | Writing and running code, implementing features, debugging |
 | Tech Specialist | Tool/framework evaluation, architecture decisions, technical specs |
 | Finance Specialist | Financial modeling, unit economics, pricing analysis, cash flow |
-| Marketer | Positioning, messaging strategy, copywriting, go-to-market |
+| Marketer | Positioning, messaging strategy, go-to-market planning |
+| Writer | Long-form content: blog posts, documentation, case studies, proposals |
+| Data Analyst | Analyzing datasets, identifying patterns, producing structured insights |
+
+To add a new worker: create a folder under `workers/` with a `CLAUDE.md` file. Use `workers/_template/CLAUDE.md` as the starting point.
 
 ## How it works
 
 1. You give the Mind a goal.
-2. The Mind selects workers, generates a task slug, reads each worker's `CLAUDE.md`, and spawns agents with the injected instructions + task.
+2. The Mind selects workers, generates a timestamped task slug, reads each worker's `CLAUDE.md`, and spawns agents with injected instructions and task details.
 3. Independent tasks run in parallel. The Mind waits for all results.
 4. The Mind synthesizes the output and presents it to you — never raw worker transcripts.
 
 Every worker returns a structured `---HIVE OUTPUT---` block so the Mind can parse results consistently regardless of worker type.
+
+## Worker chaining
+
+When tasks depend on each other, the Mind passes prior worker artifacts as context to the next spawn. The receiving worker reads those files before starting. This keeps prompts lean while maintaining continuity across multi-step pipelines.
+
+Example: Researcher produces a market report → Marketer receives the report path as context → Marketer produces positioning grounded in the research.
+
+## project.md
+
+Fill in `project.md` at the root when starting a new project. The Mind reads it at the start of every session and injects relevant context into every worker spawn — so you never have to repeat yourself.
+
+Include: what you're building, target audience, tech stack, key constraints, decisions already made, and any relevant background. Leave blank what doesn't apply.
 
 ## Using Hive
 
@@ -36,7 +52,7 @@ git clone <this-repo> my-project
 cd my-project
 ```
 
-Open the folder in Claude Code. The Mind starts automatically from `CLAUDE.md`. Project state (`mind/state.md`, decisions, logs, workspace outputs) is gitignored — it lives only in your project folder.
+Open the folder in Claude Code. The Mind starts automatically from `CLAUDE.md`. Fill in `project.md` before your first real session. The mind state files (`mind/state.md`, `mind/decisions.md`, `mind/log.jsonl`) come with their scaffolds and accumulate project history as you work.
 
 ### Update prompts
 
@@ -46,11 +62,11 @@ When worker or Mind definitions improve, pull without touching your project stat
 git pull
 ```
 
-Only the `CLAUDE.md` files update. Your runtime state is untouched.
+Only `CLAUDE.md` files, `project.md` template, and framework structure update. Mind state and workspace outputs are unaffected.
 
 ### Run multiple projects simultaneously
 
-Each clone is independent. Project state never leaves the folder it was created in.
+Each clone is fully independent.
 
 ```bash
 git clone <this-repo> project-alpha
@@ -61,32 +77,39 @@ git clone <this-repo> project-beta
 
 ```
 hive/
-├── CLAUDE.md                    # Mind identity, worker registry, spawn protocol
+├── CLAUDE.md                       # Mind identity, worker registry, spawn protocol
+├── project.md                      # Project brief — fill in when starting a project
 ├── mind/
-│   ├── state.md                 # Live task board (gitignored — per project)
-│   ├── decisions.md             # Decision log (gitignored — per project)
-│   └── log.md                   # Session activity (gitignored — per project)
+│   ├── state.md                    # Live task board (Active / Done / Blocked)
+│   ├── decisions.md                # Append-only decision log
+│   └── log.jsonl                   # Structured event log (JSON Lines)
 ├── workers/
+│   ├── _template/CLAUDE.md         # Starting point for new workers
 │   ├── researcher/CLAUDE.md
 │   ├── developer/CLAUDE.md
 │   ├── tech-specialist/CLAUDE.md
 │   ├── finance-specialist/CLAUDE.md
-│   └── marketer/CLAUDE.md
-└── workspace/                   # Worker output lives here (gitignored — per project)
+│   ├── marketer/CLAUDE.md
+│   ├── writer/CLAUDE.md
+│   └── data-analyst/CLAUDE.md
+└── workspace/                      # Worker output (content gitignored per subdirectory)
     ├── researcher/
     ├── developer/
     ├── tech-specialist/
     ├── finance-specialist/
-    └── marketer/
+    ├── marketer/
+    ├── writer/
+    └── data-analyst/
 ```
 
 ## What is and isn't tracked in git
 
-| Path | Tracked | Why |
+| Path | Tracked | Note |
 |---|---|---|
-| `CLAUDE.md` (all) | Yes | Framework — improves over time |
-| `mind/state.md` | No | Per-project runtime state |
-| `mind/decisions.md` | No | Per-project runtime state |
-| `mind/log.md` | No | Per-project runtime state |
+| `CLAUDE.md` (all) | Yes | Framework — improves over time via `git pull` |
+| `project.md` | Yes | Fill in per project |
+| `mind/state.md` | Yes | Scaffold committed; accumulates project state |
+| `mind/decisions.md` | Yes | Scaffold committed; accumulates decisions |
+| `mind/log.jsonl` | Yes | Scaffold committed; accumulates session events |
 | `workspace/*/` (directories) | Yes | Structure is part of the framework |
-| `workspace/*/*` (files) | No | Worker output belongs to the project |
+| `workspace/*/*` (files) | No | Worker output — gitignored per subdirectory |

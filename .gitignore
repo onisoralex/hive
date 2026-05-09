@@ -1,8 +1,3 @@
-# Project runtime state — generated per project, not part of the framework
-mind/state.md
-mind/decisions.md
-mind/log.md
-
 # Worker output — ignore content but keep directory structure via .gitkeep
 workspace/researcher/*
 !workspace/researcher/.gitkeep
@@ -14,3 +9,7 @@ workspace/finance-specialist/*
 !workspace/finance-specialist/.gitkeep
 workspace/marketer/*
 !workspace/marketer/.gitkeep
+workspace/writer/*
+!workspace/writer/.gitkeep
+workspace/data-analyst/*
+!workspace/data-analyst/.gitkeep
