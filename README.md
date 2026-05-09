@@ -43,6 +43,16 @@ Fill in `project.md` at the root when starting a new project. The Mind reads it 
 
 Include: what you're building, target audience, tech stack, key constraints, decisions already made, and any relevant background. Leave blank what doesn't apply.
 
+## Log viewer
+
+Open `tools/log-viewer.html` directly in any browser — no server needed. Load `mind/log.jsonl` from your project folder using the file picker.
+
+Filter by:
+- **Time range** — "last X minutes" with a live Now ceiling, or custom from/to
+- **Type** — toggle individual entry types (spawn, result, decision, note, synthesis, error, user)
+
+Click any row to expand its raw JSON. Entries are shown newest-first. Use the Reload button to refresh after a session without re-picking the file.
+
 ## Using Hive
 
 ### Start a new project
@@ -92,6 +102,8 @@ hive/
 │   ├── marketer/CLAUDE.md
 │   ├── writer/CLAUDE.md
 │   └── data-analyst/CLAUDE.md
+├── tools/
+│   └── log-viewer.html             # Browser-based log viewer — open locally, no server needed
 └── workspace/                      # Worker output (content gitignored per subdirectory)
     ├── researcher/
     ├── developer/
@@ -113,3 +125,4 @@ hive/
 | `mind/log.jsonl` | Yes | Scaffold committed; accumulates session events |
 | `workspace/*/` (directories) | Yes | Structure is part of the framework |
 | `workspace/*/*` (files) | No | Worker output — gitignored per subdirectory |
+| `tools/` | Yes | Framework utilities — improves over time |

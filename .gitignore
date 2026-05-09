@@ -1,3 +1,6 @@
+# Archived workspace output — per project, not part of the framework
+archive/
+
 # Worker output — ignore content but keep directory structure via .gitkeep
 workspace/researcher/*
 !workspace/researcher/.gitkeep

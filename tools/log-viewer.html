@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hive Log Viewer</title>
+<link rel="stylesheet" href="log-viewer.css">
+</head>
+<body>
+
+<header>
+  <h1>Hive Log Viewer</h1>
+  <button class="file-label" id="open-btn">Open log file</button>
+  <input type="file" id="file-input" accept=".jsonl,.json,.log,.txt" style="display:none">
+  <button class="btn" id="reload-btn" disabled>Reload</button>
+  <label class="auto-refresh">
+    <input type="checkbox" id="auto-refresh" checked>
+    Auto-refresh every
+    <input type="number" id="refresh-interval" value="10" min="5" max="300">
+    s
+  </label>
+  <span id="file-info">No file loaded</span>
+</header>
+
+<div class="controls">
+  <div class="ctrl-group">
+    <span class="ctrl-label">From</span>
+    <label class="time-option">
+      <input type="radio" name="from-mode" value="last" checked>
+      Last
+      <input type="number" id="last-min" value="60" min="1">
+      min
+    </label>
+    <label class="time-option">
+      <input type="radio" name="from-mode" value="custom">
+      Custom
+      <input type="date" id="from-date">
+      <input type="time" id="from-time">
+    </label>
+  </div>
+
+  <div class="ctrl-group">
+    <span class="ctrl-label">To</span>
+    <label class="time-option">
+      <input type="radio" name="to-mode" value="now" checked>
+      Now
+    </label>
+    <label class="time-option">
+      <input type="radio" name="to-mode" value="custom">
+      Custom
+      <input type="date" id="to-date">
+      <input type="time" id="to-time">
+    </label>
+  </div>
+
+  <div class="ctrl-group">
+    <span class="ctrl-label">Type</span>
+    <div class="chip-row" id="chip-row"></div>
+  </div>
+
+  <div class="ctrl-group">
+    <span class="ctrl-label">&nbsp;</span>
+    <button class="btn" id="apply-btn">Apply filters</button>
+  </div>
+</div>
+
+<div class="stats" id="stats">Open a <code>mind/log.jsonl</code> file to begin.</div>
+
+<div id="log-list">
+  <div class="empty">
+    Open <code>mind/log.jsonl</code> from your project folder using the button above.<br>
+    Entries are displayed newest-first. Click any row to expand its raw JSON.
+  </div>
+</div>
+
+<script src="log-viewer.js"></script>
+</body>
+</html>
