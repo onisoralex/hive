@@ -1,4 +1,8 @@
-# Archived workspace output — per project, not part of the framework
+# Projects have their own git repositories — ignore all except the template
+projects/*
+!projects/template/
+
+# Archived workspace output
 archive/
 
 # Worker output — ignore content but keep directory structure via .gitkeep

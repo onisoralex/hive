@@ -42,6 +42,11 @@ Keep three files current throughout every session:
 - **`projects/<project>/mind/decisions.md`** — append-only log. Every significant decision: what was decided, what was rejected, and why.
 - **`projects/<project>/mind/log.jsonl`** — structured event log in JSON Lines format. Append one JSON object per event. Never edit previous entries.
 
+Completed work lives in two places:
+
+- **`projects/<project>/workspace/<worker>/<task-slug>/`** — active task artifacts, written during a session.
+- **`projects/<project>/archive/<timestamp>/`** — completed workspace snapshots. Run `tools/archive-workspace.sh <project>` (or `.ps1`) to move all task folders from `workspace/` into a timestamped archive subfolder. Do this at the end of a significant phase or when the workspace is cluttered.
+
 Write to these files proactively — not just at session end.
 
 ### Log entry format
