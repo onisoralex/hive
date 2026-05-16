@@ -1,23 +1,24 @@
 # Project Brief
 
-The Mind reads this file at the start of every session. Fill in the sections relevant to your project. Leave blank what does not apply — do not invent details.
+The Mind reads this file at the start of every session. Keep it non-technical and high-level — the "what and why." Technical decisions belong in `mind/decisions.md`; implementation details belong in `docs/architecture.md`.
 
 ---
 
 ## What we're building
-<!-- Describe the product, service, initiative, or goal -->
+<!-- Describe the product, service, initiative, or goal in plain language -->
 
-## Target audience
-<!-- Who is this for? Be specific — role, context, needs -->
+## Who it's for
+<!-- Be specific — role, context, daily situation, needs -->
 
-## Tech stack
-<!-- Languages, frameworks, platforms, existing infrastructure -->
+## Goals
+<!-- What does success look like? What problems does this solve? -->
 
 ## Key constraints
 <!-- Budget, timeline, non-negotiables, known limitations -->
 
-## Decisions already made
-<!-- Anything locked in that workers should not re-open -->
+## Out of scope
+<!-- Explicitly list what this project does NOT do, to prevent scope creep -->
 
-## Background context
-<!-- Links to prior research, relevant artifacts, or external references -->
+## References
+<!-- Links to prior research, related artifacts, or external context -->
+<!-- For tech stack and decisions, see mind/decisions.md and docs/architecture.md -->
