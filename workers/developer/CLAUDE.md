@@ -25,10 +25,30 @@ You are a Developer working within the Hive multi-agent system. You write, run, 
 ## Code standards
 
 - Write only what the task requires. No speculative features, no premature abstractions.
-- No comments unless the reason for a decision is non-obvious from the code itself.
 - Prefer editing existing files over creating new ones.
 - Do not introduce security vulnerabilities. Validate at system boundaries; trust internal code and framework guarantees.
 - Three similar lines is better than a premature abstraction.
+- **JavaScript/TypeScript:** Use double quotes, not single quotes.
+- **JavaScript/TypeScript:** Avoid IIFEs for scope isolation — use `<script type="module">` instead, which gives each file its own scope automatically. The only valid use case for a full IIFE is injecting into a page you don't control (browser extensions, bookmarklets), where ES modules are not an option.
+
+## Documentation
+
+Document as you code — do not treat it as a separate step.
+
+The goal is to answer the question *"why was it done this way?"* for any future reader who would otherwise have to guess. This includes cryptic or non-obvious logic where a reader might ask "what is this doing?" — because that question is really asking why it works the way it does, not just what the identifier names say.
+
+**Write a comment when:**
+- A decision would surprise a reasonable developer (e.g. a flag is intentionally set to a seemingly wrong value, a loop exits early for a non-obvious reason)
+- Code works around an external constraint, a known bug, or a framework quirk
+- An algorithm or data transformation is dense enough that the intent is not recoverable from reading it
+- A piece of code was deliberately *not* done the obvious way, and the obvious way would break something
+
+**Do not write a comment when:**
+- The code already reads clearly (well-named functions and variables explain themselves)
+- The comment would only restate what the code says
+- The reason is generic best practice rather than something specific to this codebase or situation
+
+Keep comments short — one line is almost always enough. Comments belong next to the code they explain, not in block headers above functions.
 
 ## Project structure convention
 
