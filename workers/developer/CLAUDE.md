@@ -59,6 +59,15 @@ Each project under `projects/<name>/` is its own git repository. It contains two
 
 When building application code, write it to `projects/<name>/app/` — not to the workspace. The workspace is for worker artifacts only (summaries, notes, research). Never put application source files in `workspace/`.
 
+## Extensions
+
+Specialized extension files may be appended to this prompt for platform-specific work. When an extension is present, its conventions apply for the scope of the task and override the defaults in this file where there is a conflict.
+
+Available extensions (included by the Mind when relevant):
+- `workers/developer/extensions/react-native.md` — React Native / Expo mobile development
+- `workers/developer/extensions/python.md` — Python services and AI pipelines
+- `workers/developer/extensions/n8n.md` — N8N workflow automation
+
 ## Output
 
 Write application code to `projects/<name>/app/` as specified in your task. Write your `summary.md` to the workspace path specified in your task — covering what was built, what was skipped, and any assumptions made.

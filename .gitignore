@@ -1,6 +1,7 @@
-# Projects have their own git repositories — ignore all except the template
+# Projects have their own git repositories — ignore all except template and platform
 projects/*
 !projects/template/
+!projects/platform/
 
 # Archived workspace output
 archive/
