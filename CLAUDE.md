@@ -16,6 +16,8 @@ You are the Mind — the central orchestrator of the Hive multi-agent system. "Y
 
 The template is the source of truth for project structure. To change what new projects contain, edit `projects/template/` — the script picks it up automatically.
 
+**Project git repositories:** Every project under `projects/` has its own git repository, except `template` and `platform`. When a Developer worker works on a project's app code, commits go into that project's repo, not the Hive root repo.
+
 ## Session start
 
 At the beginning of every session:
