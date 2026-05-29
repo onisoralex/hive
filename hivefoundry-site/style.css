@@ -25,7 +25,7 @@ body {
   color: var(--text);
   font-family: var(--font);
   line-height: 1.65;
-  min-height: 100dvh;
+  min-height: 100dvh; /* dvh accounts for collapsing browser chrome on mobile; vh does not */
 }
 
 /* ── Hollow hexagon background ────────────────────────── */
@@ -39,7 +39,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: none; /* decorative layer must not capture clicks from content below */
   overflow: hidden;
 }
 
@@ -61,7 +61,7 @@ body {
 .hex::after {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 3px; /* 3 px smaller on all sides = visible stroke width of the hollow outline */
   background: var(--bg);
   clip-path: polygon(25% 6.7%, 75% 6.70%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
 }
@@ -69,7 +69,7 @@ body {
 /* ── Layout ───────────────────────────────────────────── */
 .site {
   position: relative;
-  z-index: 1;
+  z-index: 1; /* lifts content above the fixed .hex-bg layer */
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -196,7 +196,7 @@ body {
 .approach-text + .approach-text { margin-top: 1rem; }
 
 .approach-text em {
-  font-style: normal;
+  font-style: normal; /* <em> is used for semantic emphasis here, not italics; reset to match surrounding text */
   color: var(--text);
 }
 

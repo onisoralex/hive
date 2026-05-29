@@ -6,7 +6,7 @@ _No active tasks._
 
 ## Done
 
-_No completed tasks._
+- **hivefoundry-site** — Static landing page and privacy policy built and committed. Files at `hivefoundry-site/` (index.html, privacy.html, style.css). Ready to deploy to Cloudflare Pages.
 
 ## Blocked
 

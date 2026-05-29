@@ -1,1 +1,4 @@
 {"ts":"2026-05-24T00:00:00Z","type":"note","msg":"Platform project initialized. Packages are stubs — implement when first consumed by a product project.","project":"platform"}
+{"ts":"2026-05-29T00:00:00Z","type":"note","msg":"Session closed. Built and committed the Hive Foundry static site (index.html, privacy.html, style.css) — ready to deploy to Cloudflare Pages via GitHub integration.","project":"platform"}
+{"ts":"2026-05-29T03:36:36Z","type":"spawn","worker":"developer","task":"code-comments-20260529-033636","msg":"Spawned developer to review hivefoundry-site files for non-obvious inline comments","project":"platform"}
+{"ts":"2026-05-29T03:42:00Z","type":"result","worker":"developer","task":"code-comments-20260529-033636","status":"success","artifacts":[],"msg":"Developer added inline comments to all three hivefoundry-site files and replaced IIFEs with script type=module","project":"platform"}

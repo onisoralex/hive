@@ -42,6 +42,21 @@ Format:
 **Rejected:** Render and Railway for Next.js hosting.
 **Why:** Vercel was built by the Next.js team and has native support for Next.js's hybrid rendering model. Static pages are served from a global CDN; serverless functions handle dynamic routes; ISR works out of the box. Running Next.js on other hosts works but treats the entire app as a persistent process, losing static optimization. Vercel's free tier is generous for frontend workloads.
 
+## hivefoundry-site-hosting — 2026-05-29
+**Decision:** Cloudflare Pages for the Hive Foundry static site, not Vercel.
+**Rejected:** Vercel (for now); direct upload without GitHub integration
+**Why:** The domain is already on Cloudflare — DNS wires automatically. For a static HTML/CSS site there is no advantage to Vercel. Vercel is the right call only if the site becomes a Next.js app. GitHub integration should be connected at deploy time so every push auto-deploys; no manual uploads.
+
+## hivefoundry-site-content — 2026-05-29
+**Decision:** Removed explicit business model disclosure from the public landing page. Removed the "multi-agent hive mind" architectural description from the "How we work" section.
+**Rejected:** Keeping "Small projects fund bigger ones" in the Iterative Growth card; keeping the full Hive system description public.
+**Why:** Telling users that small apps fund bigger ambitions makes them feel instrumental rather than valued. Describing the AI architecture in detail reveals the competitive method and may reduce trust. The tagline ("Human mind. Hive hands.") communicates the collaboration angle sufficiently without over-explaining.
+
+## hivefoundry-site-copy — 2026-05-29
+**Decision:** Em-dashes removed from all public-facing copy on the site. Replaced with colons, periods, semicolons, or rephrasing depending on context.
+**Rejected:** Keeping em-dashes.
+**Why:** Em-dashes are a strong AI-text signal. On a page where trust and authenticity matter, they undermine the human feel of the copy.
+
 ## hosting-persistent-server — 2026-05-27
 **Decision:** Render is the default host for persistent server processes (WebSocket servers, Socket.io, long-running APIs). Railway is the named alternative.
 **Rejected:** Vercel for persistent servers.

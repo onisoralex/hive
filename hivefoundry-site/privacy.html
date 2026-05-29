@@ -7,6 +7,7 @@
   <meta name="description" content="Privacy policy for Hive Foundry applications and web tools." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- crossorigin required: gstatic serves fonts from a different origin, and preconnect only helps if the CORS handshake is done upfront -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -107,31 +108,29 @@
 
   </div>
 
-  <script>
-    (function () {
-      const bg = document.querySelector(".hex-bg");
-      if (!bg) return;
+  <script type="module">
+    const bg = document.querySelector(".hex-bg");
+    if (!bg) return;
 
-      const hexes = [
-        [160, -4,  6,  0.07, 12],
-        [ 90, 14, 48,  0.05,  0],
-        [220, 74,  2,  0.05, 22],
-        [110, 88, 30,  0.07,  8],
-        [ 70, 48, 84,  0.06,  5],
-        [180, 22, 68,  0.05, 28],
-        [ 95, 94, 74,  0.07,  0],
-        [ 65, 62,  7,  0.06, 18],
-        [145, 38, 40,  0.03, 30],
-      ];
+    const hexes = [
+      [160, -4,  6,  0.07, 12],
+      [ 90, 14, 48,  0.05,  0],
+      [220, 74,  2,  0.05, 22],
+      [110, 88, 30,  0.07,  8],
+      [ 70, 48, 84,  0.06,  5],
+      [180, 22, 68,  0.05, 28],
+      [ 95, 94, 74,  0.07,  0],
+      [ 65, 62,  7,  0.06, 18],
+      [145, 38, 40,  0.03, 30],
+    ];
 
-      hexes.forEach(([size, left, top, op, rot]) => {
-        const el = document.createElement("div");
-        el.className = "hex";
-        el.style.cssText =
-          `--size:${size}px;--op:${op};left:${left}%;top:${top}%;transform:rotate(${rot}deg)`;
-        bg.appendChild(el);
-      });
-    })();
+    hexes.forEach(([size, left, top, op, rot]) => {
+      const el = document.createElement("div");
+      el.className = "hex";
+      el.style.cssText =
+        `--size:${size}px;--op:${op};left:${left}%;top:${top}%;transform:rotate(${rot}deg)`;
+      bg.appendChild(el);
+    });
   </script>
 
 </body>
