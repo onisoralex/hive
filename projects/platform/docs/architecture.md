@@ -76,6 +76,39 @@ No Turborepo or Nx required. npm workspaces resolve package references. Add buil
 
 ---
 
+## Hosting & Deployment
+
+### Runtimes
+
+| Language | Use case |
+|---|---|
+| Node.js (TypeScript) | All web products, API servers, tooling |
+| Python | Data processing, ML/AI scripts, automation |
+
+### Hosting services
+
+| Workload type | Primary | Alternative | Notes |
+|---|---|---|---|
+| Next.js frontend / API routes | Vercel | — | First-class Next.js support; ISR, edge CDN, preview deployments built in |
+| Persistent server (WebSockets, Socket.io) | Render | Railway | Render has a genuine free tier; Railway's "free" tier is a $5/month credit |
+| Database | Supabase / Neon | PlanetScale | External managed DB; each product manages its own Prisma schema |
+
+### Why Vercel for Next.js
+
+Vercel was built by the Next.js team. It has native support for Next.js's hybrid rendering model — routes are automatically optimized as static (SSG), server-rendered (SSR), or incrementally regenerated (ISR) depending on their behavior. Running Next.js on Render or Railway works, but the entire app runs as a persistent Node.js process and loses the static optimization layer.
+
+**Vercel limitation:** No persistent server processes. Each request is handled by a serverless function that spins up, runs, and terminates after the response. WebSockets and Socket.io are not supported. Short-lived data transformations and standard API calls are the correct use case.
+
+### Why Render for persistent servers
+
+Render supports long-running Node.js and Python processes with WebSocket connections. Free tier is available but services spin down after 15 minutes of inactivity.
+
+**Keeping Render free-tier services alive:** Use an N8N workflow to send a periodic HTTP request (every ~14 minutes) to the service. This prevents spin-down without upgrading to a paid plan.
+
+Railway is a valid alternative — it has slightly better DX and more predictable behavior — but its "free" tier is a $5/month credit rather than a genuinely free tier, making Render the default for budget-conscious projects.
+
+---
+
 ## Environment Variables Reference
 
 Each package requires specific environment variables in the consuming product's `.env`:

@@ -36,3 +36,13 @@ Format:
 **Decision:** shadcn/ui + Tailwind CSS for all web products.
 **Rejected:** Material UI (MUI)
 **Why:** MUI imposes Google Material Design aesthetics at the architecture level — customizing away from it is a constant fight. shadcn/ui copies component source into the project (you own it, you modify it), is built on Radix UI accessible primitives, and works natively with Tailwind. No design system lock-in.
+
+## hosting-frontend — 2026-05-27
+**Decision:** Vercel is the default hosting platform for all Next.js web products.
+**Rejected:** Render and Railway for Next.js hosting.
+**Why:** Vercel was built by the Next.js team and has native support for Next.js's hybrid rendering model. Static pages are served from a global CDN; serverless functions handle dynamic routes; ISR works out of the box. Running Next.js on other hosts works but treats the entire app as a persistent process, losing static optimization. Vercel's free tier is generous for frontend workloads.
+
+## hosting-persistent-server — 2026-05-27
+**Decision:** Render is the default host for persistent server processes (WebSocket servers, Socket.io, long-running APIs). Railway is the named alternative.
+**Rejected:** Vercel for persistent servers.
+**Why:** Vercel's serverless model terminates the process after each response — persistent connections (WebSockets, Socket.io) are not supported. Render and Railway both support long-running Node.js and Python processes. Render has a genuine free tier (services spin down after 15 min inactivity, mitigated by N8N keep-alive pings every ~14 minutes). Railway's "free" tier is a $5/month credit, making Render the cost-first default. Railway is preferred when DX matters more than cost.

@@ -1,0 +1,292 @@
+/* ── Variables ────────────────────────────────────────── */
+:root {
+  --bg:         #0d0d0d;
+  --bg-card:    #131313;
+  --accent:     #c9920a;
+  --text:       #ede9e4;
+  --text-dim:   #6e6a66;
+  --border:     rgba(201, 146, 10, 0.16);
+  --max-w:      840px;
+  --font:       "Space Grotesk", system-ui, sans-serif;
+}
+
+/* ── Reset ────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+/* ── Base ─────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.65;
+  min-height: 100dvh;
+}
+
+/* ── Hollow hexagon background ────────────────────────── */
+/*
+  Each .hex uses two pseudo-elements:
+  ::before  — filled hexagon in accent color
+  ::after   — filled hexagon in bg color, inset slightly
+  Result: a hollow hexagon outline, no SVG needed.
+*/
+.hex-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hex {
+  position: absolute;
+  width: var(--size, 80px);
+  aspect-ratio: 1;
+  opacity: var(--op, 0.08);
+}
+
+.hex::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+}
+
+.hex::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--bg);
+  clip-path: polygon(25% 6.7%, 75% 6.70%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+}
+
+/* ── Layout ───────────────────────────────────────────── */
+.site {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.site-header {
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wordmark {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.wordmark b { color: var(--accent); }
+
+.site-nav a {
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-nav a:hover { color: var(--text); }
+
+/* ── Hero ─────────────────────────────────────────────── */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-block: 7rem 5rem;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+/* ── Content sections ─────────────────────────────────── */
+.content-section {
+  border-top: 1px solid var(--border);
+  padding-block: 3.5rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-body {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+/* Approach text */
+.approach-text {
+  color: var(--text-dim);
+  line-height: 1.85;
+  max-width: 600px;
+}
+
+.approach-text + .approach-text { margin-top: 1rem; }
+
+.approach-text em {
+  font-style: normal;
+  color: var(--text);
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding-block: 1.75rem;
+}
+
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+/* ── Privacy policy prose ─────────────────────────────── */
+.prose {
+  max-width: 680px;
+  padding-block: 3.5rem 5rem;
+}
+
+.prose h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.prose .meta {
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  margin-bottom: 3rem;
+}
+
+.prose .meta a {
+  color: var(--text-dim);
+}
+
+.prose h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-top: 2.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.prose p {
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.prose ul {
+  padding-left: 1.25rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.prose li {
+  margin-bottom: 0.4rem;
+  line-height: 1.7;
+}
+
+.prose a { color: var(--accent); }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 600px) {
+  .hero { padding-block: 4rem 3rem; }
+
+  .site-footer .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
