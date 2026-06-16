@@ -23,6 +23,7 @@ When any project question involves hosting, deployment, or domains, answer from 
 |---|---|
 | platform | active |
 | tone | active |
+| coffee-shop | active |
 | oikos | vaulted |
 | eidolon | vaulted |
 
