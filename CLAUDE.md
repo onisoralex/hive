@@ -34,10 +34,6 @@ Update this table whenever a project's status changes.
 
 ## Project management
 
-**Creating a new project:** Use `tools/new-project.sh <project-name>`. This copies the template from `projects/template/` into `projects/<name>/`. Names must be lowercase alphanumeric with hyphens. After creation, fill in `projects/<name>/project.md` and add a row to the registry above.
-
-**Archiving a completed workspace:** Done manually by moving the project folder. Run this at the end of a significant phase or when the workspace is cluttered.
-
 The template is the source of truth for project structure. To change what new projects contain, edit `projects/template/` — the script picks it up automatically.
 
 **Project git repositories:** Every project under `projects/` has its own git repository, except `template` and `platform`. When a Developer worker works on a project's app code, commits go into that project's repo, not the Hive root repo.
@@ -47,7 +43,7 @@ The template is the source of truth for project structure. To change what new pr
 At the beginning of every session:
 
 1. Read the project registry above. Present active projects to the user and ask which project(s) to work on today. Vaulted projects are on ice — mention them only if the user asks or wants to resume one. Wait for their answer before proceeding — do not assume.
-2. For each selected project, read `projects/<name>/project.md` and `projects/<name>/mind/state.md`. Use project context to inform all worker spawns — do not ask the user to repeat what is already there.
+2. For each selected project, read `projects/<name>/project.md` and `projects/<name>/mind/state.md`. If `projects/<name>/CLAUDE.md` exists, read it too — it contains project-specific context for the Mind and may instruct you to read additional files (e.g. an `app/CLAUDE.md` or `app/AGENTS.md` inside a nested repo). Use all of this to inform worker spawns — do not ask the user to repeat what is already there.
 3. If any tasks are listed under `## Active` in a project's state file, surface them before accepting new work: list each task slug and its last known status from `projects/<name>/mind/log.jsonl`. Ask whether to resume, discard, or investigate each one. Update `projects/<name>/mind/state.md` once the user decides.
 
 When working on multiple projects in the same session, tag every task, log entry, and state update to its project. Keep each project's state files strictly separate.
@@ -79,7 +75,7 @@ Keep three files current throughout every session:
 Completed work lives in two places:
 
 - **`projects/<project>/workspace/<worker>/<task-slug>/`** — active task artifacts, written during a session.
-- **`projects/<project>/archive/<timestamp>/`** — completed workspace snapshots. Run `tools/archive-workspace.sh <project>` (or `.ps1`) to move all task folders from `workspace/` into a timestamped archive subfolder. Do this at the end of a significant phase or when the workspace is cluttered.
+- **`projects/<project>/archive/<timestamp>/`** — completed workspace snapshots, created by the archive script.
 
 Write to these files proactively — not just at session end.
 
@@ -203,16 +199,3 @@ When tasks are independent, spawn all workers simultaneously with `run_in_backgr
 
 Never dump raw worker output to the user. Extract key findings, reconcile any conflicts, and present a coherent result with a clear recommendation or next step. The user sees synthesis, not transcripts.
 
-## Post-deploy monitoring
-
-After a project ships to production, schedule periodic check-ins. At each check-in:
-
-1. Ask the user for (or confirm availability of) current analytics data: PostHog/Plausible export, Stripe revenue summary, error logs.
-2. Spawn a **Data Analyst** with the analytics data as context. Task: evaluate traction against the project's success criteria from `project.md`.
-3. Synthesize the result into one of three signals:
-   - **Iterate** — traction exists; spawn a Developer or Researcher for the next improvement
-   - **Kill** — no meaningful traction after a reasonable window; document the decision in `mind/decisions.md` and move the project to archive
-   - **Scale** — exceeding expectations; surface to user for reinvestment discussion
-4. Log the decision as a `decision` entry in `mind/log.jsonl`.
-
-Check-in frequency: weekly for new launches (first 4 weeks), monthly thereafter. The user can override this cadence per project.
