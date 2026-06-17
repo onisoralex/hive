@@ -1,5 +1,5 @@
 ---
-name: hive-postdeploy
+name: postdeploy
 description: Run a post-deploy monitoring check-in for a Hive project, evaluating traction and deciding whether to iterate, kill, or scale.
 argument-hint: "Project name to evaluate (leave blank to be prompted)"
 ---

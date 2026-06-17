@@ -1,5 +1,5 @@
 ---
-name: hive-new-project
+name: new-project
 description: Create a new Hive project by running the creation script, filling in the project file, and registering it.
 argument-hint: "Project name (lowercase alphanumeric with hyphens)"
 ---

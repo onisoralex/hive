@@ -2,9 +2,11 @@
 projects/*
 !projects/template/
 !projects/platform/
+!projects/coffee-shop/
+projects/coffee-shop/app/
 
-# Archived workspace output
-archive/
+# Archived workspace output (anchored to root — does not affect projects/*/archive/)
+/archive/
 
 # Worker output — ignore content but keep directory structure via .gitkeep
 workspace/researcher/*

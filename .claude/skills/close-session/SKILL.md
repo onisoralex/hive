@@ -1,3 +1,8 @@
+---
+name: close-session
+description: Perform an end-of-session handoff for the Hive — update state, record decisions, close the log, flag archives, update app AI context, and spawn a developer for code comments.
+---
+
 Perform an end-of-session handoff for the Hive. Work through these steps in order. Do not skip steps, even if a project had little activity.
 
 ## Step 1 — Scope the session
@@ -40,7 +45,15 @@ For each active project, append a session-close entry to `projects/<name>/mind/l
 
 For each active project, check whether `projects/<name>/workspace/<worker>/` contains any task folders (not just `.gitkeep`). If so, list them and note they are candidates for archiving via `tools/archive-workspace.sh <project>`. Do not run the script.
 
-## Step 6 — Spawn developer for code comments
+## Step 6 — Update app AI context
+
+For each active project that has an `app/AGENTS.md` (or `app/CLAUDE.md`):
+- If a genuinely non-obvious architectural fact emerged this session that isn't already captured there, add it to the relevant section.
+- If the user expressed a new preference, corrected a convention, or gave feedback on your approach — update the relevant section in place.
+- Do not duplicate content that's already there. Do not copy current-state information — that belongs in `mind/state.md`.
+- Skip this step if nothing new emerged that the file doesn't already cover.
+
+## Step 7 — Spawn developer for code comments
 
 Read `workers/developer/CLAUDE.md`. Then, from the git diff in Step 1, collect all source code files that were added or modified this session (exclude markdown, JSON config, `.env`, `.gitignore`, and lockfiles).
 
@@ -60,9 +73,9 @@ Files to review:
 <list of files with absolute paths>
 ```
 
-Spawn with `run_in_background: true`. Log the spawn in `mind/log.jsonl`. You do not need to wait for the result before proceeding to Step 7.
+Spawn with `run_in_background: true`. Log the spawn in `mind/log.jsonl`. You do not need to wait for the result before proceeding to Step 8.
 
-## Step 7 — Report
+## Step 8 — Report
 
 Output a structured summary:
 

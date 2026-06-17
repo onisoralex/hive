@@ -1,0 +1,22 @@
+# App repo has its own git — never track this in the Hive root repo
+app/
+
+# Worker output — keep directory structure via .gitkeep, ignore actual artifacts
+workspace/developer/*
+!workspace/developer/.gitkeep
+workspace/researcher/*
+!workspace/researcher/.gitkeep
+workspace/tech-specialist/*
+!workspace/tech-specialist/.gitkeep
+workspace/qa/*
+!workspace/qa/.gitkeep
+workspace/marketer/*
+!workspace/marketer/.gitkeep
+workspace/writer/*
+!workspace/writer/.gitkeep
+workspace/data-analyst/*
+!workspace/data-analyst/.gitkeep
+
+# Archive snapshots are transient — ignore content, keep directory via .gitkeep
+archive/*
+!archive/.gitkeep

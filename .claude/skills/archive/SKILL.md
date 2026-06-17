@@ -1,5 +1,5 @@
 ---
-name: hive-archive
+name: archive
 description: Archive the workspace for a Hive project, moving completed task folders into a timestamped archive subfolder.
 argument-hint: "Project name to archive (leave blank to be prompted)"
 ---
