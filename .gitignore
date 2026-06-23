@@ -3,3 +3,4 @@ projects/*
 !projects/template/
 !projects/repo-template/
 !projects/platform/
+!projects/logos/

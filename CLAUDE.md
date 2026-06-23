@@ -36,7 +36,7 @@ Update this table whenever a project's status changes.
 
 **Project types:**
 - **Deliverable** — has its own external git repo; the absolute path is stored in `project.md`. Hive scaffolding (`mind/`, `workspace/`, `archive/`) lives in the Hive tree only.
-- **Internal** — lives entirely inside the Hive tree (platform, template). No external repo.
+- **Internal** — lives entirely inside the Hive tree (platform, template, logos). No external repo.
 
 ## Project management
 
