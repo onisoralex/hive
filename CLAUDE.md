@@ -26,6 +26,7 @@ When any project question involves hosting, deployment, or domains, answer from 
 | coffee-shop | active |
 | oikos | vaulted |
 | eidolon | vaulted |
+| logos | vaulted |
 
 **Status definitions:**
 - `active` — currently being worked on or ready to pick up
@@ -33,18 +34,24 @@ When any project question involves hosting, deployment, or domains, answer from 
 
 Update this table whenever a project's status changes.
 
+**Project types:**
+- **Deliverable** — has its own external git repo; the absolute path is stored in `project.md`. Hive scaffolding (`mind/`, `workspace/`, `archive/`) lives in the Hive tree only.
+- **Internal** — lives entirely inside the Hive tree (platform, template). No external repo.
+
 ## Project management
 
-The template is the source of truth for project structure. To change what new projects contain, edit `projects/template/` — the script picks it up automatically.
+Two templates live under `projects/`:
+- **`projects/template/`** — Hive scaffolding template. `new-project.sh` copies this into `projects/<name>/`. Edit here to change what all new projects get.
+- **`projects/repo-template/`** — project repo starting point. Copy this into `C:\repos\<name>/` when initializing a new project repo. Contains `CLAUDE.md`, `docs/architecture.md`, `docs/monetization.md`, and `docs/specs/spec.md`.
 
-**Project git repositories:** Every project under `projects/` has its own git repository, except `template` and `platform`. When a Developer worker works on a project's app code, commits go into that project's repo, not the Hive root repo.
+**Project git repositories:** Deliverable projects have their own external git repo at the absolute path stored in `project.md`. Internal projects (platform, template) live entirely in the Hive tree. When spawning workers that touch project files, always include the repo path in the task description so workers know where to commit.
 
 ## Session start
 
 At the beginning of every session:
 
 1. Read the project registry above. Present active projects to the user and ask which project(s) to work on today. Vaulted projects are on ice — mention them only if the user asks or wants to resume one. Wait for their answer before proceeding — do not assume.
-2. For each selected project, read `projects/<name>/project.md` and `projects/<name>/mind/state.md`. If `projects/<name>/CLAUDE.md` exists, read it too — it contains project-specific context for the Mind and may instruct you to read additional files (e.g. an `app/CLAUDE.md` or `app/AGENTS.md` inside a nested repo). Use all of this to inform worker spawns — do not ask the user to repeat what is already there.
+2. For each selected project, read `projects/<name>/project.md` and `projects/<name>/mind/state.md`. If `projects/<name>/CLAUDE.md` exists, read it too — it contains project-specific Mind instructions. Use the repo path from `project.md` to also read the project repo's `CLAUDE.md` (or `AGENTS.md` if the project uses that system). Use all of this to inform worker spawns — do not ask the user to repeat what is already there.
 3. If any tasks are listed under `## Active` in a project's state file, surface them before accepting new work: list each task slug and its last known status from `projects/<name>/mind/log.jsonl`. Ask whether to resume, discard, or investigate each one. Update `projects/<name>/mind/state.md` once the user decides.
 
 When working on multiple projects in the same session, tag every task, log entry, and state update to its project. Keep each project's state files strictly separate.

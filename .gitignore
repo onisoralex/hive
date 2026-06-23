@@ -1,25 +1,5 @@
-# Projects have their own git repositories — ignore all except template and platform
+# Internal projects are tracked; deliverable project scaffolding is not
 projects/*
 !projects/template/
+!projects/repo-template/
 !projects/platform/
-!projects/coffee-shop/
-projects/coffee-shop/app/
-
-# Archived workspace output (anchored to root — does not affect projects/*/archive/)
-/archive/
-
-# Worker output — ignore content but keep directory structure via .gitkeep
-workspace/researcher/*
-!workspace/researcher/.gitkeep
-workspace/developer/*
-!workspace/developer/.gitkeep
-workspace/tech-specialist/*
-!workspace/tech-specialist/.gitkeep
-workspace/finance-specialist/*
-!workspace/finance-specialist/.gitkeep
-workspace/marketer/*
-!workspace/marketer/.gitkeep
-workspace/writer/*
-!workspace/writer/.gitkeep
-workspace/data-analyst/*
-!workspace/data-analyst/.gitkeep

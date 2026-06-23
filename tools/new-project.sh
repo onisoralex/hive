@@ -37,4 +37,9 @@ fi
 cp -r "$TEMPLATE" "$PROJECT"
 
 echo "Created projects/$NAME"
-echo "Next: fill in projects/$NAME/project.md"
+echo "Next:"
+echo "  1. Set the repo path in projects/$NAME/project.md"
+echo "  2. Fill in project brief in projects/$NAME/project.md"
+echo "  3. Add spawning notes to projects/$NAME/CLAUDE.md"
+echo "  4. Initialize the project repo: git init C:/repos/$NAME"
+echo "     Copy projects/repo-template/ into it as a starting point"

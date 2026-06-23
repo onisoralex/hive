@@ -1,6 +1,8 @@
 # Project Brief
 
-The Mind reads this file at the start of every session. Keep it non-technical and high-level — the "what and why." Technical decisions belong in `mind/decisions.md`; implementation details belong in `docs/architecture.md`.
+repo: <!-- absolute path to the project repo, e.g. C:\repos\project-name -->
+
+The Mind reads this file at the start of every session. Keep it non-technical and high-level — the "what and why." Technical decisions belong in `mind/decisions.md`; implementation details belong in the project repo.
 
 ---
 
