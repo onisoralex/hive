@@ -27,6 +27,8 @@ When any project question involves hosting, deployment, or domains, answer from 
 | oikos | vaulted |
 | eidolon | vaulted |
 | logos | vaulted |
+| localweb | active |
+| setlist | active |
 
 **Status definitions:**
 - `active` — currently being worked on or ready to pick up
