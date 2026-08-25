@@ -29,6 +29,8 @@ When any project question involves hosting, deployment, or domains, answer from 
 | logos | vaulted |
 | localweb | active |
 | setlist | active |
+| obsidian-kanban | active |
+| aaa | active |
 
 **Status definitions:**
 - `active` — currently being worked on or ready to pick up

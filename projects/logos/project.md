@@ -37,7 +37,7 @@ Personal use only (Alex). Covers coding projects, DnD campaigns, electronics pro
 
 All goals met. MemPalace is installed and running. Setup and usage are fully documented. No further development needed.
 
-The `memory-system/` folder contains the abandoned custom Qdrant + BGE-M3 + Node.js MCP implementation — built but never deployed. Kept as a record; safe to delete if disk space is a concern.
+The `memory-system/` folder (abandoned custom Qdrant + BGE-M3 + Node.js MCP implementation, built but never deployed) was deleted on 2026-08-11 — superseded by the MemPalace pivot, no longer needed as a record.
 
 ## References
 

@@ -41,3 +41,13 @@ Format:
 **Decision:** Replace the custom Logos stack (Qdrant + BGE-M3 embedding service + Node.js MCP server) with MemPalace.
 **Rejected:** Testing and deploying the custom-built Logos system.
 **Why:** MemPalace meets all core requirements (fully local, MCP-native, semantic search, persistent, hierarchical scoping) with a pip install and no Docker stack. Logos was never tested. Maintenance overhead of a custom Docker+Python+Node stack is not worth the retrieval quality improvement (BGE-M3 vs all-MiniLM-L6-v2) given personal use cases. User wants to focus effort on project/code creation, not memory infrastructure.
+
+## memory-system-cleanup — 2026-08-11
+**Decision:** Delete the `memory-system/` folder (abandoned custom Qdrant + BGE-M3 + Node.js MCP implementation).
+**Rejected:** Keeping it on disk as a historical record.
+**Why:** Superseded by the MemPalace pivot and never deployed. Full history remains recoverable via git; no reason to keep it taking up disk space.
+
+## scaffold-cleanup — 2026-08-11
+**Decision:** Delete `docs/architecture.md`, `docs/specs/spec.md`, `mind/backlog.md`, `mind/roadmap.md`, `mind/open-questions.md`.
+**Rejected:** Keeping them as unused placeholders.
+**Why:** All five were untouched Hive scaffolding templates (byte-identical to `projects/template/`), never filled in because logos was a setup/config project, not a code build. `architecture.md` and `spec.md` in particular described a web-app stack (API endpoints, Postgres tables, Express files) that never applied here. Removing them reduces clutter with no information loss — full history recoverable via git.
