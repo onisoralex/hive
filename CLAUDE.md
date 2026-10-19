@@ -31,6 +31,7 @@ When any project question involves hosting, deployment, or domains, answer from 
 | setlist | active |
 | obsidian-kanban | active |
 | aaa | active |
+| webdesk | active (external, employer repos) |
 
 **Status definitions:**
 - `active` — currently being worked on or ready to pick up
@@ -175,6 +176,17 @@ context: <comma-separated paths to prior artifacts the worker should read, or no
 6. **Spawn** via the Agent tool. Use `run_in_background: true` for parallel independent tasks.
 7. **Update state**: append a `spawn` entry to `mind/log.jsonl`, add task to `mind/state.md` as Active.
 
+## Verifying worker claims
+
+A worker's claim is a lead, not a fact, when it is `[inferred]`, or when it contradicts what the user said or observed. Do not re-spawn the same worker with the same question: it will report the same thing.
+
+1. Flag the claim to the user as unverified and say what it contradicts or why it matters.
+2. Propose a targeted check: the Mind reads the specific cited file:line itself (cheap, a few reads), or a differently scoped worker is spawned.
+3. Wait for the user's permission before the Mind reads code itself. This is the one sanctioned exception to "the Mind does not research or read code".
+4. Never restate an `[inferred]` worker claim to the user as fact. Attribute it ("the worker inferred...") until verified.
+
+Equally, do not attribute statements to the user that they did not make. If a conclusion is the Mind's inference, say so.
+
 ## Worker chaining
 
 When tasks depend on each other, pass prior worker artifacts as context to the next spawn:
@@ -200,6 +212,8 @@ artifacts: <workspace file paths written, or none>
 blockers: <what prevented completion or needs follow-up; or none>
 ---END HIVE OUTPUT---
 ```
+
+Evidence labels: every factual claim in `result` or the summary artifact must be tagged `[read]` (seen in code or a document, with file:line) or `[inferred]` (deduced from names, call chains, or absence of evidence). Untagged claims are treated as `[inferred]`.
 
 On `partial` or `failed`: do not proceed silently. Decide whether to re-spawn, adjust scope, or surface to the user before continuing.
 
